@@ -13,9 +13,11 @@
     <script>
       var unityInstance = UnityLoader.instantiate("unityContainer", "Build/WebGL.json", {onProgress: UnityProgress});
       function Reset(){
-        var canvas = document.getElementById("#canvas");
-        canvas.height = document.documentElement.clientHeight;
-        canvas.width = document.documentElement.clientWidth;
+        document.getElementById("unityContainer").style.width = window.innerWidth + "px";
+	      document.getElementById("unityContainer").style.height = window.innerHeight + "px";
+	      document.getElementById("#canvas").style.width = window.innerWidth + "px";
+	      document.getElementById("#canvas").style.height = window.innerHeight + "px";
+	      
       }
         
     </script>
@@ -27,10 +29,35 @@
 	min-height: 100%;
 	background-color: #000;
       }
+	    @media screen and (orientation:potrait){
+		    html{
+			    width:100vw;
+			    height:100vh;
+		    }
+		    body{
+			    width:100vh;
+			    height:100vh;
+		    }
+		    .webgl-content{
+			    width:100vw;
+			    height:100vh;
+		    }
+	    }
+	    
+	    @media screen and (orientation:landscape){
+		    
+		    .webgl-content{
+			    position:absolute;
+			    width:100vw;
+			    height:100vh;
+			    top:0;
+			    left:100vw;
+		    }
+	    }
     </style>
   </head>
-  <body onload="Reset()" onresize="Reset()" scroll=no >
-    <div class="webgl-content" style="width: 480px; height: 800px">
+  <body onResize="Reset()" scroll=no >
+    <div class="webgl-content">
       <div id="unityContainer" style="width: 480px; height: 800px"></div>
     </div>
   </body>
